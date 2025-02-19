@@ -8,6 +8,22 @@
 
 const prompt = require("prompt-sync")();
 
+const rows = 3;
+const cols = 3;
+
+const symbols_count = {
+    "A" : 2,    
+    "B" : 2,    
+    "C" : 2,    
+    "D" : 2,    
+}
+const symbols_value = {
+    "A" : 5,    
+    "B" : 4,    
+    "C" : 3,    
+    "D" : 2,    
+}
+
 const deposit = ()=>{
     while(true){
         const depositAmount = prompt("Enter Deposit Amount : ");
@@ -25,7 +41,7 @@ const deposit = ()=>{
 }
 const getNumberOfLines = ()=>{
     while(true){
-        const lines = prompt("Enter number of lines : ");
+        const lines = prompt("Enter number of lines (1-3): ");
         //by default we get string so convert it into number
         const numberLines = parseFloat(lines);
 
@@ -40,18 +56,22 @@ const getNumberOfLines = ()=>{
 }
 const getBet = (balance,lines)=>{
     while(true){
-        const bet = prompt("Enter the total bet you want to place : ");
+        const bet = prompt("Enter the bet per line : ");
         //by default we get string so convert it into number
         const numberBet = parseFloat(bet);
-
-        if(isNaN(numberBet) || numberBet <= 0 || numberBet > balance){
-            console.log(`Invalid bet! balance is ${balance}..Try Again`);
+        const totalBet = numberBet*lines;
+        if(isNaN(numberBet) || numberBet <= 0 || totalBet > balance){
+            console.log(`Invalid bet! balance is ${balance} and required is ${totalBet}..Try Again`);
         }
         else{
             //break while loop if valid
             return numberBet;
         }
     }
+}
+
+const spin = ()=>{
+    
 }
 
 const balance = deposit();
